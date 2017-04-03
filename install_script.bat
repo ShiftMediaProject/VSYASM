@@ -127,20 +127,19 @@ if not exist "%VCTargetsPath%\BuildCustomizations\yasm.props" (
     goto Terminate
 )
 
-REM Download the latest yasm binary for windows
-if "%SYSARCH%"=="x32" (
-    set YASMDOWNLOAD=%YASMDL%/yasm-%YASMVERSION%-win32.exe
-) else if "%SYSARCH%"=="x64" (
-    set YASMDOWNLOAD=%YASMDL%/yasm-%YASMVERSION%-win64.exe
+REM Check if a yasm binary was bundled
+if not exist "./yasm" (
+    REM Download the latest yasm binary for windows goto Terminate
+    call :DownloadYasm
 ) else (
-    goto Terminate
-)
-echo Downloading required YASM release binary...
-powershell.exe -Command (New-Object Net.WebClient).DownloadFile('%YASMDOWNLOAD%', './yasm.exe') 1>NUL 2>NUL
-if not exist "./yasm.exe" (
-    echo Error: Failed to download required YASM binary!
-    echo    The following link could not be resolved "%YASMDOWNLOAD%"
-    goto Terminate
+    REM Use the bundled binaries
+    if "%SYSARCH%"=="x32" (
+        copy /B /Y /V ".\yasm\yasm-32.exe" ".\yasm.exe" 1>NUL 2>NUL
+    ) else if "%SYSARCH%"=="x64" (
+        copy /B /Y /V ".\yasm\yasm-64.exe" ".\yasm.exe" 1>NUL 2>NUL
+    ) else (
+        goto Terminate
+    )
 )
 
 REM copy yasm executable to VC installation folder
@@ -156,3 +155,21 @@ echo Finished Successfully
 
 :Terminate
 pause
+exit /b
+
+:DownloadYasm
+if "%SYSARCH%"=="x32" (
+    set YASMDOWNLOAD=%YASMDL%/yasm-%YASMVERSION%-win32.exe
+) else if "%SYSARCH%"=="x64" (
+    set YASMDOWNLOAD=%YASMDL%/yasm-%YASMVERSION%-win64.exe
+) else (
+    goto Terminate
+)
+echo Downloading required YASM release binary...
+powershell.exe -Command (New-Object Net.WebClient).DownloadFile('%YASMDOWNLOAD%', './yasm.exe') 1>NUL 2>NUL
+if not exist "./yasm.exe" (
+    echo Error: Failed to download required YASM binary!
+    echo    The following link could not be resolved "%YASMDOWNLOAD%"
+    goto Terminate
+)
+goto :eof
