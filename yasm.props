@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup
+    Condition="'$(YASMBeforeTargets)' == '' and '$(YASMAfterTargets)' == '' and '$(ConfigurationType)' != 'Makefile'">
+    <YASMBeforeTargets>Midl</YASMBeforeTargets>
+    <YASMAfterTargets>CustomBuild</YASMAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <YasmPath Condition= "'$(YASMPATH)' == ''">$(VCInstallDir)</YasmPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <YASM>
+      <Preprocessor>0</Preprocessor>
+      <Parser>0</Parser>
+      <OutputFormat>$(IntDir)%(FileName).obj</OutputFormat>
+      <CommandLineTemplate>"$(YasmPath)"yasm.exe -Xvc -f win$(PlatformArchitecture) [AllOptions] [AdditionalOptions] "%(FullPath)"</CommandLineTemplate>
+      <ExecutionDescription>Assembling %(Identity)...</ExecutionDescription>
+    </YASM>
+  </ItemDefinitionGroup>
+</Project>
