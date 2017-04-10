@@ -204,7 +204,7 @@
     Name="YASM"
     DisplayName="Yasm Modular Assembler" />
   <FileExtension
-    Name="*.asm"
+    Name="*.asm;*.s"
     ContentType="YASM" />
   <ContentType
     Name="YASM"
