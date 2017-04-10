@@ -153,7 +153,7 @@ if not exist "%VCTargetsPath%\BuildCustomizations\yasm.props" (
 )
 
 REM Check if a yasm binary was bundled
-if not exist "./yasm" (
+if not exist "%~dp0/yasm" (
     REM Download the latest yasm binary for windows goto Terminate
     call :DownloadYasm
 ) else (
