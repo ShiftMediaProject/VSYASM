@@ -40,6 +40,7 @@
       </YASM_tlog>
     </ItemGroup>
     <Message
+      Condition="'@(YASM)' != '' and '%(YASM.ExcludedFromBuild)' != 'true'"
       Importance="High"
       Text="%(YASM.ExecutionDescription)" />
     <WriteLinesToFile
@@ -60,7 +61,7 @@
       TreatWarningsAsErrors="%(YASM.TreatWarningsAsErrors)"
       CommandLineTemplate="%(YASM.CommandLineTemplate)"
       AdditionalOptions="%(YASM.AdditionalOptions)"
- />
+    />
   </Target>
   <Target
     Name="ComputeYASMOutput"

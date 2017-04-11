@@ -14,7 +14,7 @@
       <Parser>0</Parser>
       <OutputFormat>$(IntDir)%(FileName).obj</OutputFormat>
       <CommandLineTemplate>"$(YasmPath)"yasm.exe -Xvc -f win$(PlatformArchitecture) [AllOptions] [AdditionalOptions] "%(FullPath)"</CommandLineTemplate>
-      <ExecutionDescription>Assembling %(Identity)...</ExecutionDescription>
+      <ExecutionDescription>%(Identity)</ExecutionDescription>
     </YASM>
   </ItemDefinitionGroup>
 </Project>
