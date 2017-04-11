@@ -5,8 +5,8 @@ set YASMDL=http://www.tortall.net/projects/yasm/releases
 set YASMVERSION=1.3.0
 
 REM Store current directory and ensure working directory is the location of current .bat
-SET CALLDIR=%CD%
-cd %~dp0
+set CALLDIR=%CD%
+set SCRIPTDIR=%~dp0
 
 REM Initialise error check value
 SET ERROR=0
@@ -145,7 +145,7 @@ if not "%CURRDIR%"=="%CD%" (
 
 REM copy the BuildCustomizations to VCTargets folder
 echo Installing build customisations...
-copy /B /Y /V "./yasm.*" "%VCTargetsPath%\BuildCustomizations\" 1>NUL 2>NUL
+copy /B /Y /V "%SCRIPTDIR%\yasm.*" "%VCTargetsPath%\BuildCustomizations\" 1>NUL 2>NUL
 if not exist "%VCTargetsPath%\BuildCustomizations\yasm.props" (
     echo Error: Failed to copy build customisations!
     echo    Ensure that this script is run in a shell with the necessary write privileges
@@ -153,15 +153,15 @@ if not exist "%VCTargetsPath%\BuildCustomizations\yasm.props" (
 )
 
 REM Check if a yasm binary was bundled
-if not exist "%~dp0/yasm" (
+if not exist "%SCRIPTDIR%\yasm\" (
     REM Download the latest yasm binary for windows goto Terminate
     call :DownloadYasm
 ) else (
     REM Use the bundled binaries
     if "%SYSARCH%"=="x32" (
-        copy /B /Y /V ".\yasm\yasm-32.exe" ".\yasm.exe" 1>NUL 2>NUL
+        copy /B /Y /V "%SCRIPTDIR%\yasm\yasm-32.exe" "%SCRIPTDIR%\yasm.exe" 1>NUL 2>NUL
     ) else if "%SYSARCH%"=="x64" (
-        copy /B /Y /V ".\yasm\yasm-64.exe" ".\yasm.exe" 1>NUL 2>NUL
+        copy /B /Y /V "%SCRIPTDIR%\yasm\yasm-64.exe" "%SCRIPTDIR%\yasm.exe" 1>NUL 2>NUL
     ) else (
         goto Terminate
     )
@@ -169,11 +169,11 @@ if not exist "%~dp0/yasm" (
 
 REM copy yasm executable to VC installation folder
 echo Installing required YASM release binary...
-move /Y "yasm.exe" "%VCINSTALLDIR%\" 1>NUL 2>NUL
+move /Y "%SCRIPTDIR%\yasm.exe" "%VCINSTALLDIR%\" 1>NUL 2>NUL
 if not exist "%VCINSTALLDIR%\yasm.exe" (
     echo Error: Failed to install YASM binary!
     echo    Ensure that this script is run in a shell with the necessary write privileges
-    del /F /Q "./yasm.exe" 1>NUL 2>NUL
+    del /F /Q "%SCRIPTDIR%\yasm.exe" 1>NUL 2>NUL
     goto Terminate
 )
 echo Finished Successfully
@@ -198,8 +198,8 @@ if "%SYSARCH%"=="x32" (
     goto Terminate
 )
 echo Downloading required YASM release binary...
-powershell.exe -Command (New-Object Net.WebClient).DownloadFile('%YASMDOWNLOAD%', './yasm.exe') 1>NUL 2>NUL
-if not exist "./yasm.exe" (
+powershell.exe -Command (New-Object Net.WebClient).DownloadFile('%YASMDOWNLOAD%', '%SCRIPTDIR%\yasm.exe') 1>NUL 2>NUL
+if not exist "%SCRIPTDIR%\yasm.exe" (
     echo Error: Failed to download required YASM binary!
     echo    The following link could not be resolved "%YASMDOWNLOAD%"
     goto Terminate
