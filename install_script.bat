@@ -145,6 +145,7 @@ if not "%CURRDIR%"=="%CD%" (
 
 REM copy the BuildCustomizations to VCTargets folder
 echo Installing build customisations...
+del /F /Q "%VCTargetsPath%\BuildCustomizations\yasm.*" 1>NUL 2>NUL
 copy /B /Y /V "%SCRIPTDIR%\yasm.*" "%VCTargetsPath%\BuildCustomizations\" 1>NUL 2>NUL
 if not exist "%VCTargetsPath%\BuildCustomizations\yasm.props" (
     echo Error: Failed to copy build customisations!
@@ -169,6 +170,7 @@ if not exist "%SCRIPTDIR%\yasm\" (
 
 REM copy yasm executable to VC installation folder
 echo Installing required YASM release binary...
+del /F /Q "%VCINSTALLDIR%\yasm.exe" 1>NUL 2>NUL
 move /Y "%SCRIPTDIR%\yasm.exe" "%VCINSTALLDIR%\" 1>NUL 2>NUL
 if not exist "%VCINSTALLDIR%\yasm.exe" (
     echo Error: Failed to install YASM binary!
