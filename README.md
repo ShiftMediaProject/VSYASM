@@ -1,18 +1,23 @@
-# VSYASM
-
+VSYASM
+=============
+[![Github All Releases](https://img.shields.io/github/downloads/ShiftMediaProject/VSYASM/total.svg)](https://github.com/ShiftMediaProject/VSYASM/releases)
+[![GitHub release](https://img.shields.io/github/release/ShiftMediaProject/VSYASM.svg)](https://github.com/ShiftMediaProject/VSYASM/releases/latest)
+[![GitHub issues](https://img.shields.io/github/issues/ShiftMediaProject/VSYASM.svg)](https://github.com/ShiftMediaProject/VSYASM/issues)
+[![license](https://img.shields.io/github/license/ShiftMediaProject/VSYASM.svg)](https://github.com/ShiftMediaProject/VSYASM)
+[![donate](https://img.shields.io/badge/donate-link-brightgreen.svg)](https://shiftmediaproject.github.io/8-donate/)
 Provides Visual Studio integration for the YASM assembler.
 Supports Visual Studio 2010, 2012, 2013, 2015 and 2017.
 
-# About
+## About
 
 This project provides a set of build customisations that can be used within Visual Studio to compile assembly code using YASM.
 
-# YASM
+## YASM
 
 The Netwide Assembler (YASM) is an assembler and disassembler for the Intel x86 architecture. It can be used to write 16-bit, 32-bit (IA-32) and 64-bit (x86-64) programs.
 For more information on YASM refer to the official site: [http://yasm.tortall.net](http://yasm.tortall.net).
 
-# Installation
+## Installation
 
 The project provides a basic installer script that can automatically detect any installed Visual Studio 2013, 2015 or 2017 installation and then install the required components.
 To use this script simply run '**install_script.bat**' from an elevated command prompt.
@@ -48,5 +53,5 @@ For example the location for various Visual Studio version ona 64 bit system wou
 
 To use YASM in a project you must enable the customisation by right click on the project in the Solution Explorer and select 'Build Customisations..'. This will give you a dialog box that allows you to select YASM as an assembler (note that your assembler files need to have the extension '.asm').  If you have used option **3** above, you will need to let the dialogue find them using the 'Find Existing' button below the dialogue.
 
-To assemble a file with YASM, select the Property Page for the file and ensure that 'Nasm Assembler' is selected in the Tool dialog entry.
+To assemble a file with YASM, select the Property Page for the file and ensure that 'YASM Assembler' is selected in the Tool dialog entry.
 The additional YASM property page can then be used to change various options supported by YASM..
