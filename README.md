@@ -5,12 +5,12 @@ VSYASM
 [![GitHub issues](https://img.shields.io/github/issues/ShiftMediaProject/VSYASM.svg)](https://github.com/ShiftMediaProject/VSYASM/issues)
 [![license](https://img.shields.io/github/license/ShiftMediaProject/VSYASM.svg)](https://github.com/ShiftMediaProject/VSYASM)
 [![donate](https://img.shields.io/badge/donate-link-brightgreen.svg)](https://shiftmediaproject.github.io/8-donate/)
-Provides Visual Studio integration for the YASM assembler.
-Supports Visual Studio 2010, 2012, 2013, 2015 and 2017.
 
 ## About
 
 This project provides a set of build customisations that can be used within Visual Studio to compile assembly code using YASM.
+Provides Visual Studio integration for the YASM assembler.
+Supports Visual Studio 2010, 2012, 2013, 2015 and 2017.
 
 ## YASM
 
