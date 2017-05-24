@@ -17,13 +17,13 @@
           <sys:String>General</sys:String>
         </Category.DisplayName>
       </Category>
-	  <Category
+      <Category
         Name="Preprocessor">
         <Category.DisplayName>
           <sys:String>Preprocessing Options</sys:String>
         </Category.DisplayName>
       </Category>
-	  <Category
+      <Category
         Name="Assembler Options">
         <Category.DisplayName>
           <sys:String>Assembler Options</sys:String>
@@ -49,53 +49,53 @@
       </StringProperty.DataSource>
     </StringProperty>
     <StringProperty
-	  Name="OutputFormat"
+      Name="ObjectFileName"
       Category="Assembler Options"
-      HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html"
       DisplayName="Output File Name"
       Description="Specify Output Filename."
-	  Switch="-o &quot;[value]&quot;" />
-	<BoolProperty
-	  Name="GenerateDebugInformation"
-	  Category="Assembler Options"
-	  DisplayName="Generate Debug Information"
-	  Description="Generates Debug Information."
-	  HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html"
-	  Switch="-g cv8" />
-	<StringListProperty
-	  Name="IncludePaths"
-	  Category="General"
-	  DisplayName="Include File Search Directories"
-	  Description="Sets path for include files."
-	  HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html"
-	  Switch="-I&quot;[value]/&quot;" />
-	<StringListProperty
-	  Name="PreIncludeFiles"
-	  Category="General"
-	  DisplayName="Pre-Include a File"
-	  Description="Force files to be pre-included into source file."
-	  HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html"
-	  Switch="-P&quot;[value]&quot;" />
-	<StringListProperty
-	  Name="PreprocessorDefinitions"
+      HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html#yasm-option-objfile"
+      Switch="-o &quot;[value]&quot;" />
+    <BoolProperty
+      Name="GenerateDebugInformation"
+      Category="Assembler Options"
+      DisplayName="Generate Debug Information"
+      Description="Generates Debug Information."
+      HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html#yasm-option-dformat"
+      Switch="-g cv8" />
+    <StringListProperty
+      Name="IncludePaths"
+      Category="General"
+      DisplayName="Include File Search Directories"
+      Description="Sets path for include files."
+      HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html#yasm-option-i"
+      Switch="-I&quot;[value]/&quot;" />
+    <StringListProperty
+      Name="PreIncludeFiles"
+      Category="General"
+      DisplayName="Pre-Include a File"
+      Description="Force files to be pre-included into source file."
+      HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html#yasm-option-p"
+      Switch="-P&quot;[value]&quot;" />
+    <StringListProperty
+      Name="PreprocessorDefinitions"
       Category="Preprocessor"
-      HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html"
       DisplayName="Preprocessor Definitions"
       Description="Defines a text macro with the given name."
-	  Switch="-D[value]" />
+      HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html#yasm-option-d"
+      Switch="-D[value]" />
     <StringListProperty
-	  Name="UndefinePreprocessorDefinitions"
-	  Category="Preprocessor"
-	  HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html"
-	  DisplayName="Undefine Preprocessor Definitions"
-	  Description="Undefines a text macro with the given name."
-	  Switch="-U[value]" />
+      Name="UndefinePreprocessorDefinitions"
+      Category="Preprocessor"
+      DisplayName="Undefine Preprocessor Definitions"
+      Description="Undefines a text macro with the given name."
+      HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html#yasm-option-u"
+      Switch="-U[value]" />
     <EnumProperty
-	  Name="Preprocessor"
-	  Category="Preprocessor"
-	  HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html"
+      Name="Preprocessor"
+      Category="Preprocessor"
       DisplayName="Pre-Processor"
-      Description="Select the pre-processor to use on the input file">
+      Description="Select the pre-processor to use on the input file"
+      HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html#yasm-option-preproc">
       <EnumValue
         Name="0"
         DisplayName="Nasm"
@@ -106,11 +106,11 @@
         Switch="-rraw" />
     </EnumProperty>
     <EnumProperty
-	  Name="Parser"
-	  Category="Preprocessor"
-	  HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html"
+      Name="Parser"
+      Category="Preprocessor"
       DisplayName="Parser"
-      Description="Select the parser (the assembler syntax)">
+      Description="Select the parser (the assembler syntax)"
+      HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html#yasm-option-parser">
       <EnumValue
         Name="0"
         DisplayName="Nasm"
@@ -120,13 +120,13 @@
         DisplayName="Gas"
         Switch="-pgas" />
     </EnumProperty>
-	<BoolProperty
-	  Name="TreatWarningsAsErrors"
-	  Category="Assembler Options"
-	  DisplayName="Treat Warnings As Errors"
-	  Description="Returns an error code if warnings are generated."
-	  HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html"
-	  Switch="-Werror" />
+    <BoolProperty
+      Name="TreatWarningsAsErrors"
+      Category="Assembler Options"
+      DisplayName="Treat Warnings As Errors"
+      Description="Returns an error code if warnings are generated."
+      HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html#yasm-option-werror"
+      Switch="-Werror" />
     <StringProperty
       Name="CommandLineTemplate"
       DisplayName="Command Line"

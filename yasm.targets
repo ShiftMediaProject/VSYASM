@@ -28,14 +28,14 @@
     BeforeTargets="$(YASMBeforeTargets)"
     AfterTargets="$(YASMAfterTargets)"
     Condition="'@(YASM)' != ''"
-    Outputs="%(YASM.OutputFormat)"
+    Outputs="%(YASM.ObjectFileName)"
     Inputs="%(YASM.Identity);%(YASM.AdditionalDependencies);$(MSBuildProjectFile)"
     DependsOnTargets="_SelectedFiles">
     <ItemGroup Condition="'@(SelectedFiles)' != ''">
       <YASM Remove="@(YASM)" Condition="'%(Identity)' != '@(SelectedFiles)'" />
     </ItemGroup>
     <ItemGroup>
-      <YASM_tlog Include="%(YASM.OutputFormat)" Condition="'%(YASM.OutputFormat)' != '' and '%(YASM.ExcludedFromBuild)' != 'true'">
+      <YASM_tlog Include="%(YASM.ObjectFileName)" Condition="'%(YASM.ObjectFileName)' != '' and '%(YASM.ExcludedFromBuild)' != 'true'">
         <Source>@(YASM, '|')</Source>
       </YASM_tlog>
     </ItemGroup>
@@ -50,7 +50,7 @@
     <YASM
       Condition="'@(YASM)' != '' and '%(YASM.ExcludedFromBuild)' != 'true'"
       Inputs="%(YASM.Inputs)"
-      OutputFormat="%(YASM.OutputFormat)"
+      ObjectFileName="%(YASM.ObjectFileName)"
       GenerateDebugInformation="%(YASM.GenerateDebugInformation)"
       IncludePaths="%(YASM.IncludePaths)"
       PreIncludeFiles="%(YASM.PreIncludeFiles)"
@@ -67,8 +67,8 @@
     Name="ComputeYASMOutput"
     Condition="'@(YASM)' != ''">
     <ItemGroup>
-      <Link Include="@(YASM->Metadata('OutputFormat')->Distinct()->ClearMetadata())" Condition="'%(YASM.ExcludedFromBuild)' != 'true'"/>
-      <Lib Include="@(YASM->Metadata('OutputFormat')->Distinct()->ClearMetadata())" Condition="'%(YASM.ExcludedFromBuild)' != 'true'"/>
+      <Link Include="@(YASM->Metadata('ObjectFileName')->Distinct()->ClearMetadata())" Condition="'%(YASM.ExcludedFromBuild)' != 'true'"/>
+      <Lib Include="@(YASM->Metadata('ObjectFileName')->Distinct()->ClearMetadata())" Condition="'%(YASM.ExcludedFromBuild)' != 'true'"/>
     </ItemGroup>
   </Target>
 </Project>
