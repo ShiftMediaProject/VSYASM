@@ -51,6 +51,8 @@
       Condition="'@(YASM)' != '' and '%(YASM.ExcludedFromBuild)' != 'true'"
       Inputs="%(YASM.Inputs)"
       ObjectFileName="%(YASM.ObjectFileName)"
+      SymbolsPrefix="%(NASM.SymbolsPrefix)"
+      SymbolsPostfix="%(NASM.SymbolsPostfix)"
       GenerateDebugInformation="%(YASM.GenerateDebugInformation)"
       IncludePaths="%(YASM.IncludePaths)"
       PreIncludeFiles="%(YASM.PreIncludeFiles)"

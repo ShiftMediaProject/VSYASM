@@ -62,6 +62,18 @@
       Description="Generates Debug Information."
       HelpUrl="http://www.tortall.net/projects/yasm/manual/html/yasm-options.html#yasm-option-dformat"
       Switch="-g cv8" />
+    <StringProperty
+      Name="SymbolsPrefix"
+      Category="Assembler Options"
+      DisplayName="Symbols Prefix"
+      Description="Prepend the given argument to all global or extern variables."
+      Switch="--prefix [value]" />
+    <StringProperty
+      Name="SymbolsPostfix"
+      Category="Assembler Options"
+      DisplayName="Symbols Postfix"
+      Description="Append the given argument to all global or extern variables."
+      Switch="--postfix [value]" />
     <StringListProperty
       Name="IncludePaths"
       Category="General"
