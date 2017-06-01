@@ -141,7 +141,7 @@ REM copy the BuildCustomizations to VCTargets folder
 echo Installing build customisations...
 del /F /Q "%VCTargetsPath%\BuildCustomizations\yasm.*" >nul 2>&1
 copy /B /Y /V "%SCRIPTDIR%\yasm.*" "%VCTargetsPath%\BuildCustomizations\" >nul 2>&1
-if not exist "%VCTargetsPath%\BuildCustomizations\yasm.props" (
+if %ERRORLEVEL% neq 0 (
     echo Error: Failed to copy build customisations!
     echo    Ensure that this script is run in a shell with the necessary write privileges
     goto Terminate
@@ -159,11 +159,8 @@ if not exist "%SCRIPTDIR%\yasm\" (
 REM copy yasm executable to VC installation folder
 echo Installing required YASM release binary...
 del /F /Q "%VCINSTALLDIR%\yasm.exe" >nul 2>&1
-move /Y "%SCRIPTDIR%\yasm.exe" "%VCINSTALLDIR%\" >nul 2>&1
-set INSTALLED=1
-if exist "%SCRIPTDIR%\yasm.exe" set INSTALLED=0
-if not exist "%VCINSTALLDIR%\yasm.exe" set INSTALLED=0
-if %INSTALLED% equ 0 (
+copy /B /Y /V "%SCRIPTDIR%\yasm.exe" "%VCINSTALLDIR%\" >nul 2>&1
+if %ERRORLEVEL% neq 0 (
     echo Error: Failed to install YASM binary!
     echo    Ensure that this script is run in a shell with the necessary write privileges
     del /F /Q "%SCRIPTDIR%\yasm.exe"  >nul 2>&1
