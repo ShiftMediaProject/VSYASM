@@ -166,6 +166,7 @@ if %ERRORLEVEL% neq 0 (
     del /F /Q "%SCRIPTDIR%\yasm.exe"  >nul 2>&1
     goto Terminate
 )
+del /F /Q "%SCRIPTDIR%\yasm.exe"  >nul 2>&1
 echo Finished Successfully
 goto Exit
 
