@@ -10,7 +10,7 @@ VSYASM
 
 This project provides a set of build customisations that can be used within Visual Studio to compile assembly code using YASM.
 Provides Visual Studio integration for the YASM assembler.
-Supports Visual Studio 2010, 2012, 2013, 2015 and 2017.
+Supports Visual Studio 2010, 2012, 2013, 2015, 2017 and 2019.
 
 ## YASM
 
@@ -19,10 +19,10 @@ For more information on YASM refer to the official site: [http://yasm.tortall.ne
 
 ## Installation
 
-The project provides a basic installer script that can automatically detect any installed Visual Studio 2013, 2015 or 2017 installation and then install the required components.
+The project provides a basic installer script that can automatically detect any installed Visual Studio 2013, 2015, 2017 or 2019 installation and then install the required components.
 To use this script simply run '**install_script.bat**' from an elevated command prompt.
 
-To manually install the extension you will first need to download the required win32 or win64 binary (depending on your system) from the official YASM website [http://yasm.tortall.net](http://yasm.tortall.net).
+Alternatively, to manually install the extension you will first need to download the required win32 or win64 binary (depending on your system) from the official YASM website [http://yasm.tortall.net](http://yasm.tortall.net).
 
 From the download archive you will need to extract yasm.exe into a location that Visual Studio can see.
 To tell Visual Studio where to find yasm.exe you have several options:
@@ -46,6 +46,7 @@ For example the location for various Visual Studio versions on a 64 bit system w
     1. Visual Studio 2013: C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\BuildCustomizations
     2. Visual Studio 2015: C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\BuildCustomizations
     3. Visual Studio 2017: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\BuildCustomizations
+	4. Visual Studio 2019: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations
 
 2. Copy these files to a convenient location and set that path in the 'Build Customisations Search Path' in the Visual Studio 'Projects and Solutions|VC++ Project Settings' item in the 'Tools|Options' menu.
 
