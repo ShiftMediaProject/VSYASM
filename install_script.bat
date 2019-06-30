@@ -325,7 +325,7 @@ SET ERROR=1
 
 :Exit
 cd %CALLDIR%
-if "%APPVEYOR%"=="" (
+if "%CI%"=="" (
     if not defined ISINSTANCE (
         pause
     )
