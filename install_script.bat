@@ -292,7 +292,7 @@ if exist "%SCRIPTDIR%\yasm\" (
     goto InstallYASM
 ) else if exist "%SCRIPTDIR%\yasm_%YASMVERSION%_win%SYSARCH%.exe" (
     echo Using existing YASM binary...
-    goto InstallNASM
+    goto InstallYASM
 )
 
 REM Download the latest yasm binary for windows goto Terminate
@@ -309,7 +309,7 @@ if not exist "%SCRIPTDIR%\yasm_%YASMVERSION%_win%SYSARCH%.exe" (
 REM copy yasm executable to VC installation folder
 echo Installing required YASM release binary...
 del /F /Q "%VCINSTALLDIR%\yasm.exe" >nul 2>&1
-copy /B /Y /V "%SCRIPTDIR%\yasm*.exe" "%VCINSTALLDIR%\" >nul 2>&1
+copy /B /Y /V "%SCRIPTDIR%\yasm*.exe" "%VCINSTALLDIR%\yasm.exe" >nul 2>&1
 if %ERRORLEVEL% neq 0 (
     echo Error: Failed to install YASM binary!
     echo    Ensure that this script is run in a shell with the necessary write privileges
