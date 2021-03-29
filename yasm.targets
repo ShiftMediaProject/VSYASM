@@ -24,6 +24,33 @@
     <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
   </UsingTask>
   <Target
+    Name="_WriteYasmTlogs"
+    Condition="'@(YASM)' != '' and '@(SelectedFiles)' == ''">
+    <ItemGroup>
+      <YASM Remove="@(YASM)" Condition="'%(YASM.ExcludedFromBuild)' == 'true' or '%(YASM.ObjectFileName)' == ''" />
+    </ItemGroup>
+    <ItemGroup Condition="'@(YASM)' != ''">
+      <_YasmReadTlog Include="^%(YASM.FullPath);%(YASM.AdditionalDependencies)" />
+      <_YasmWriteTlog Include="^%(YASM.FullPath);$([MSBuild]::NormalizePath('$(MSBuildProjectDirectory)', '%(YASM.ObjectFileName)'))" />
+    </ItemGroup>
+    <WriteLinesToFile
+      Condition="'@(_YasmReadTlog)' != ''"
+      File="$(TLogLocation)Yasm.read.1u.tlog"
+      Lines="@(_YasmReadTlog->MetaData('Identity')->ToUpperInvariant());"
+      Overwrite="true"
+      Encoding="Unicode"/>
+    <WriteLinesToFile
+      Condition="'@(_YasmWriteTlog)' != ''"
+      File="$(TLogLocation)Yasm.write.1u.tlog"
+      Lines="@(_YasmWriteTlog->MetaData('Identity')->ToUpperInvariant());"
+      Overwrite="true"
+      Encoding="Unicode"/>
+    <ItemGroup>
+      <_YasmReadTlog Remove="@(_YasmReadTlog)" />
+      <_YasmWriteTlog Remove="@(_YasmWriteTlog)" />
+    </ItemGroup>
+  </Target>
+  <Target
     Name="_YASM"
     BeforeTargets="$(YASMBeforeTargets)"
     AfterTargets="$(YASMAfterTargets)"
@@ -34,25 +61,16 @@
     <ItemGroup Condition="'@(SelectedFiles)' != ''">
       <YASM Remove="@(YASM)" Condition="'%(Identity)' != '@(SelectedFiles)'" />
     </ItemGroup>
-    <ItemGroup>
-      <YASM_tlog Include="%(YASM.ObjectFileName)" Condition="'%(YASM.ObjectFileName)' != '' and '%(YASM.ExcludedFromBuild)' != 'true'">
-        <Source>@(YASM, '|')</Source>
-      </YASM_tlog>
-    </ItemGroup>
     <Message
       Condition="'@(YASM)' != '' and '%(YASM.ExcludedFromBuild)' != 'true'"
       Importance="High"
       Text="%(YASM.ExecutionDescription)" />
-    <WriteLinesToFile
-      Condition="'@(YASM_tlog)' != '' and '%(YASM_tlog.ExcludedFromBuild)' != 'true'"
-      File="$(IntDir)$(ProjectName).write.1.tlog"
-      Lines="^%(YASM_tlog.Source);@(YASM_tlog-&gt;'%(Fullpath)')"/>
     <YASM
       Condition="'@(YASM)' != '' and '%(YASM.ExcludedFromBuild)' != 'true'"
       Inputs="%(YASM.Inputs)"
       ObjectFileName="%(YASM.ObjectFileName)"
-      SymbolsPrefix="%(NASM.SymbolsPrefix)"
-      SymbolsPostfix="%(NASM.SymbolsPostfix)"
+      SymbolsPrefix="%(YASM.SymbolsPrefix)"
+      SymbolsPostfix="%(YASM.SymbolsPostfix)"
       GenerateDebugInformation="%(YASM.GenerateDebugInformation)"
       IncludePaths="%(YASM.IncludePaths)"
       PreIncludeFiles="%(YASM.PreIncludeFiles)"
