@@ -74,7 +74,7 @@ if exist "%SCRIPTDIR%\vswhere.exe" (
 )
 set VSWHEREDOWNLOAD=%VSWHEREDL%/%VSWHEREVERSION%/vswhere.exe
 echo Downloading required vswhere release binary...
-powershell.exe -Command (New-Object Net.WebClient).DownloadFile('%VSWHEREDOWNLOAD%', '%SCRIPTDIR%\vswhere.exe') >nul 2>&1
+powershell.exe -Command "(New-Object Net.WebClient).DownloadFile('%VSWHEREDOWNLOAD%', '%SCRIPTDIR%\vswhere.exe')" >nul 2>&1
 if not exist "%SCRIPTDIR%\vswhere.exe" (
     echo Error: Failed to download required vswhere binary!
     echo    The following link could not be resolved "%VSWHEREDOWNLOAD%"
@@ -311,37 +311,37 @@ if %ERRORLEVEL% neq 0 (
 )
 
 REM Check if a yasm binary was bundled
-if exist "%SCRIPTDIR%\yasm\" (
-    REM Use the bundled binaries
-    copy /B /Y /V "%SCRIPTDIR%\yasm\yasm-%SYSARCH%.exe" "%SCRIPTDIR%\yasm-%SYSARCH%.exe" >nul 2>&1
+set YASMEXE=%SCRIPTDIR%\yasm-%YASMVERSION%-win%SYSARCH%.exe
+if exist "%YASMEXE%" (
     goto InstallYASM
-) else if exist "%SCRIPTDIR%\yasm_%YASMVERSION%_win%SYSARCH%.exe" (
-    echo Using existing YASM binary...
+) else if exist "%SCRIPTDIR%\yasm\" (
+    set YASMEXE=%SCRIPTDIR%\yasm\yasm-%SYSARCH%.exe
     goto InstallYASM
 )
 
-REM Download the latest yasm binary for windows goto Terminate
-echo Downloading required YASM release binary...
+REM Download the latest yasm binary for windows
+echo Downloading and installing required YASM release binary...
 set YASMDOWNLOAD=%YASMDL%/yasm-%YASMVERSION%-win%SYSARCH%.exe
-powershell.exe -Command (New-Object Net.WebClient).DownloadFile('%YASMDOWNLOAD%', '%SCRIPTDIR%\yasm_%YASMVERSION%_win%SYSARCH%.exe') >nul 2>&1
-if not exist "%SCRIPTDIR%\yasm_%YASMVERSION%_win%SYSARCH%.exe" (
+powershell.exe -Command "(New-Object Net.WebClient).DownloadFile('%YASMDOWNLOAD%', '%VCINSTALLDIR%\yasm.exe')" >nul 2>&1
+if not exist "%VCINSTALLDIR%\yasm.exe" (
     echo Error: Failed to download required YASM binary!
     echo    The following link could not be resolved "%YASMDOWNLOAD%"
     goto Terminate
 )
+goto Finalize
 
 :InstallYASM
 REM copy yasm executable to VC installation folder
+echo Using existing YASM binary...
 echo Installing required YASM release binary...
-del /F /Q "%VCINSTALLDIR%\yasm.exe" >nul 2>&1
-copy /B /Y /V "%SCRIPTDIR%\yasm*.exe" "%VCINSTALLDIR%\yasm.exe" >nul 2>&1
+copy /B /Y /V "%YASMEXE%" "%VCINSTALLDIR%\yasm.exe" >nul 2>&1
 if %ERRORLEVEL% neq 0 (
     echo Error: Failed to install YASM binary!
     echo    Ensure that this script is run in a shell with the necessary write privileges
-    del /F /Q "%SCRIPTDIR%\yasm*.exe"  >nul 2>&1
     goto Terminate
 )
-del /F /Q "%SCRIPTDIR%\yasm*.exe"  >nul 2>&1
+
+:Finalize
 echo Finished Successfully
 goto Exit
 
