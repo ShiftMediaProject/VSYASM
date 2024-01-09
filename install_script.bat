@@ -342,6 +342,10 @@ if %ERRORLEVEL% neq 0 (
 )
 
 :Finalize
+REM Define ASM_NASM for usage with CMake unless already defined
+if "%ASM_NASM%"=="" (
+    powershell.exe -Command "[Environment]::SetEnvironmentVariable('ASM_NASM', '%VCINSTALLDIR%\yasm.exe', 'Machine')"
+)
 echo Finished Successfully
 goto Exit
 
