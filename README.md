@@ -10,7 +10,7 @@ VSYASM
 
 This project provides a set of build customisations that can be used within Visual Studio to compile assembly code using YASM.
 Provides Visual Studio integration for the YASM assembler.
-Supports Visual Studio 2010, 2012, 2013, 2015, 2017 and 2019.
+Supports Visual Studio 2010, 2012, 2013, 2015, 2017, 2019 and 2022.
 
 ## YASM
 
