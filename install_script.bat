@@ -311,16 +311,18 @@ if %ERRORLEVEL% neq 0 (
 )
 
 REM Check if a yasm binary was bundled
-set YASMEXE=%SCRIPTDIR%\yasm-%YASMVERSION%-win%SYSARCH%.exe
+set YASMEXE=%SCRIPTDIR%\yasm\yasm-%SYSARCH%.exe
 if exist "%YASMEXE%" (
+    REM Use the bundled binaries
     goto InstallYASM
-) else if exist "%SCRIPTDIR%\yasm\" (
-    set YASMEXE=%SCRIPTDIR%\yasm\yasm-%SYSARCH%.exe
+) else if exist "%SCRIPTDIR%\yasm_%YASMVERSION%_win%SYSARCH%.exe" (
+    set YASMEXE=%SCRIPTDIR%\yasm_%YASMVERSION%_win%SYSARCH%.exe
     goto InstallYASM
 )
 
 REM Download the latest yasm binary for windows
-echo Downloading and installing required YASM release binary...
+echo Downloading required YASM binary...
+del /F /Q "%VCINSTALLDIR%\yasm.exe"  >nul 2>&1
 set YASMDOWNLOAD=%YASMDL%/yasm-%YASMVERSION%-win%SYSARCH%.exe
 powershell.exe -Command "(New-Object Net.WebClient).DownloadFile('%YASMDOWNLOAD%', '%VCINSTALLDIR%\yasm.exe')" >nul 2>&1
 if not exist "%VCINSTALLDIR%\yasm.exe" (
@@ -328,23 +330,17 @@ if not exist "%VCINSTALLDIR%\yasm.exe" (
     echo    The following link could not be resolved "%YASMDOWNLOAD%"
     goto Terminate
 )
-goto Finalize
+goto Exit
 
 :InstallYASM
 REM copy yasm executable to VC installation folder
-echo Using existing YASM binary...
-echo Installing required YASM release binary...
+echo Installing existing YASM binary...
+del /F /Q "%VCINSTALLDIR%\yasm.exe" >nul 2>&1
 copy /B /Y /V "%YASMEXE%" "%VCINSTALLDIR%\yasm.exe" >nul 2>&1
 if %ERRORLEVEL% neq 0 (
     echo Error: Failed to install YASM binary!
     echo    Ensure that this script is run in a shell with the necessary write privileges
     goto Terminate
-)
-
-:Finalize
-REM Define ASM_NASM for usage with CMake unless already defined
-if "%ASM_NASM%"=="" (
-    powershell.exe -Command "[Environment]::SetEnvironmentVariable('ASM_NASM', '%VCINSTALLDIR%\yasm.exe', 'Machine')"
 )
 echo Finished Successfully
 goto Exit
