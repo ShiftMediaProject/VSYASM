@@ -19,7 +19,7 @@ For more information on YASM refer to the official site: [http://yasm.tortall.ne
 
 ## Installation
 
-The project provides a basic installer script that can automatically detect any installed Visual Studio 2013, 2015, 2017 or 2019 installation and then install the required components.
+The project provides a basic installer script that can automatically detect any installed Visual Studio 2013, 2015, 2017, 2019 or 2022 installation and then install the required components.
 To use this script simply run '**install_script.bat**' from an elevated (i.e administrator) command prompt.
 
 ## Manual Installation (optional)
