@@ -5,7 +5,7 @@ REM Defined cript variables
 set YASMDL=http://www.tortall.net/projects/yasm/releases
 set YASMVERSION=1.3.0
 set VSWHEREDL=https://github.com/Microsoft/vswhere/releases/download
-set VSWHEREVERSION=2.8.4
+set VSWHEREVERSION=3.1.7
 
 REM Store current directory and ensure working directory is the location of current .bat
 set CALLDIR=%CD%
