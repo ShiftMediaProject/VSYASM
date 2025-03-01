@@ -13,8 +13,8 @@
       <Preprocessor>0</Preprocessor>
       <Parser>0</Parser>
       <ObjectFileName>$(IntDir)%(FileName).obj</ObjectFileName>
-      <CommandLineTemplate Condition="'$(Platform)' == 'Win32'">"$(YasmPath)"yasm.exe -Xvc -f win32 [AllOptions] [AdditionalOptions] "%(FullPath)"</CommandLineTemplate>
-      <CommandLineTemplate Condition="'$(Platform)' == 'x64'">"$(YasmPath)"yasm.exe -Xvc -f win64 [AllOptions] [AdditionalOptions] "%(FullPath)"</CommandLineTemplate>
+      <CommandLineTemplate Condition="'$(Platform)' == 'Win32'">"$(YasmPath)\yasm.exe" -Xvc -f win32 [AllOptions] [AdditionalOptions] "%(FullPath)"</CommandLineTemplate>
+      <CommandLineTemplate Condition="'$(Platform)' == 'x64'">"$(YasmPath)\yasm.exe" -Xvc -f win64 [AllOptions] [AdditionalOptions] "%(FullPath)"</CommandLineTemplate>
       <CommandLineTemplate Condition="'$(Platform)' != 'Win32' and '$(Platform)' != 'x64'">echo YASM not supported on this platform
 exit 1</CommandLineTemplate>
       <ExecutionDescription>%(Identity)</ExecutionDescription>

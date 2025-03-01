@@ -1,5 +1,6 @@
 VSYASM
 =============
+
 [![Github All Releases](https://img.shields.io/github/downloads/ShiftMediaProject/VSYASM/total.svg)](https://github.com/ShiftMediaProject/VSYASM/releases)
 [![GitHub release](https://img.shields.io/github/release/ShiftMediaProject/VSYASM.svg)](https://github.com/ShiftMediaProject/VSYASM/releases/latest)
 [![GitHub issues](https://img.shields.io/github/issues/ShiftMediaProject/VSYASM.svg)](https://github.com/ShiftMediaProject/VSYASM/issues)
@@ -47,12 +48,13 @@ There are several ways to do this:
 
 1. Copy these files to the MSBuild customisations directory.
 This can be determined from within Visual Studio by checking the contents of the VCTargetsPath macro.
-For example the location for various Visual Studio versions on a 64 bit system would be:
+For example the location for various Visual Studio Community Edition versions on a 64 bit system would be:
 
     1. Visual Studio 2013: C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\BuildCustomizations
     2. Visual Studio 2015: C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\BuildCustomizations
     3. Visual Studio 2017: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\BuildCustomizations
 	4. Visual Studio 2019: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations
+    5. Visual Studio 2022: C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\BuildCustomizations
 
 2. Copy these files to a convenient location and set that path in the 'Build Customisations Search Path' in the Visual Studio 'Projects and Solutions|VC++ Project Settings' item in the 'Tools|Options' menu.
 
