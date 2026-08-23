@@ -25,6 +25,9 @@ REM Check what architecture we are installing on
 if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
     echo Detected 64 bit system...
     set SYSARCH=64
+) else if "%PROCESSOR_ARCHITECTURE%"=="ARM64" (
+    echo Detected ARM64 system, using x64 tools...
+    set SYSARCH=64
 ) else if "%PROCESSOR_ARCHITECTURE%"=="x86" (
     if "%PROCESSOR_ARCHITEW6432%"=="AMD64" (
         echo Detected 64 bit system running 32 bit shell...
